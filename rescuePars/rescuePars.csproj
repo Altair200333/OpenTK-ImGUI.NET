@@ -56,6 +56,8 @@
     <Compile Include="ECS\MeshRenderer.cs" />
     <Compile Include="ECS\Transform.cs" />
     <Compile Include="Engine.cs" />
+    <Compile Include="Loaders\MeshLoader.cs" />
+    <Compile Include="Scene.cs" />
     <Compile Include="Window\Input.cs" />
     <Compile Include="Object.cs" />
     <Compile Include="Program.cs" />

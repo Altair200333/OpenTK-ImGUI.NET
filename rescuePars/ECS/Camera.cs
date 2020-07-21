@@ -7,6 +7,9 @@ using OpenTK;
 
 namespace rescuePars.ECS
 {
+    /// <summary>
+    /// Contains information about orientation of camera in space. Also handles mouse look input 
+    /// </summary>
     class Camera : Component
     {
         const float YAW = -90.0f;
@@ -16,20 +19,19 @@ namespace rescuePars.ECS
         const float ZOOM = 60.0f;
         const float ASPECTR = 1.0f;
 
-        public Vector3 Front;
-        public Vector3 Up;
-        public Vector3 Right;
+        public Vector3 front;
+        public Vector3 up;
+        public Vector3 right;
         public Vector3 WorldUp = new Vector3(0.0f, 1.0f, 0.0f);
 
         float yaw = YAW;
-
         float pitch = PITCH;
 
         // Camera options
         float movementSpeed = SPEED;
         float mouseSensitivity = SENSITIVITY;
         public float zoom = ZOOM;
-        public float aspectRatio;
+        public float aspectRatio = ASPECTR;
 
         public override int getId()
         {
@@ -41,10 +43,10 @@ namespace rescuePars.ECS
         {
         }
 
-        public Camera(float aspect)
+        public Camera(float aspect, Vector3 front)
         {
             aspectRatio = aspect;
-            Front = new Vector3(0.0f, 0.0f, -1.0f);
+            this.front = front;
             updateCameraVectors();
         }
         public void cameraMouseLook(Vector2 offset, bool constrainPitch)
@@ -55,7 +57,6 @@ namespace rescuePars.ECS
             yaw += offset.X;
             pitch -= offset.Y;
 
-            // Make sure that when pitch is out of bounds, screen doesn't get flipped
             if (constrainPitch)
             {
                 if (pitch > 89.0f)
@@ -64,13 +65,12 @@ namespace rescuePars.ECS
                     pitch = -89.0f;
             }
 
-            // Update Front, Right and Up Vectors using the updated Euler angles
             updateCameraVectors();
         }
         public Matrix4 getViewMatrix()
         {
             Vector3 pos = owner.getComponent<Transform>().position;
-            return Matrix4.LookAt(pos, pos + Front, Up);
+            return Matrix4.LookAt(pos, pos + front, up);
         }
         public static float Radians(double angle)
         {
@@ -83,11 +83,11 @@ namespace rescuePars.ECS
             front.X = (float) (Math.Cos(Radians(yaw)) * Math.Cos(Radians(pitch)));
             front.Y = (float) Math.Sin(Radians(pitch));
             front.Z = (float) (Math.Sin(Radians(yaw)) * Math.Cos(Radians(pitch)));
-            Front = Vector3.Normalize(front);
+            this.front = Vector3.Normalize(front);
             // Also re-calculate the Right and Up vector
-            Right = Vector3.Normalize(Vector3.Cross(Front,
+            right = Vector3.Normalize(Vector3.Cross(this.front,
                 WorldUp)); // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
-            Up = Vector3.Normalize(Vector3.Cross(Right, Front));
+            up = Vector3.Normalize(Vector3.Cross(right, this.front));
         }
     }
 }

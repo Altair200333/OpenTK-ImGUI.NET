@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace rescuePars.ECS
 {
+    /// <summary>Class responsible for handling components i.e. add, delete, get</summary>
     class ComponentManager
     {
         private Dictionary<int, Component> components;

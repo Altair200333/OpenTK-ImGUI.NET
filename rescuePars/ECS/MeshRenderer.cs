@@ -8,6 +8,7 @@ using OpenTK.Graphics.OpenGL4;
 
 namespace rescuePars.ECS
 {
+    /// <summary>Component responsible for drawing mesh component attached to object</summary>
     class MeshRenderer : Component
     {
         Shader.Shader shader;
