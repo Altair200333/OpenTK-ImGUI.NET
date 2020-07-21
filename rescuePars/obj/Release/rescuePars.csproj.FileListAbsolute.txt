@@ -1,0 +1,12 @@
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Release\rescuePars.exe.config
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Release\rescuePars.exe
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Release\rescuePars.pdb
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Release\OpenTK.dll
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Release\OpenTK.GLControl.dll
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Release\OpenTK.pdb
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Release\OpenTK.xml
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Release\OpenTK.GLControl.pdb
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Release\OpenTK.GLControl.xml
+E:\WORK\CSapps\rescuePars\rescuePars\obj\Release\rescuePars.csproj.CopyComplete
+E:\WORK\CSapps\rescuePars\rescuePars\obj\Release\rescuePars.exe
+E:\WORK\CSapps\rescuePars\rescuePars\obj\Release\rescuePars.pdb

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rescuePars", "rescuePars\rescuePars.csproj", "{EBFB0BE3-F7A8-47AC-9AB5-82B95175F9BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EBFB0BE3-F7A8-47AC-9AB5-82B95175F9BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBFB0BE3-F7A8-47AC-9AB5-82B95175F9BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBFB0BE3-F7A8-47AC-9AB5-82B95175F9BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBFB0BE3-F7A8-47AC-9AB5-82B95175F9BE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {800FB3C3-B128-47AE-8DF1-6C80A9A2E088}
+	EndGlobalSection
+EndGlobal
