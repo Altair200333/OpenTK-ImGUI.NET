@@ -56,12 +56,12 @@
     <Compile Include="ECS\MeshRenderer.cs" />
     <Compile Include="ECS\Transform.cs" />
     <Compile Include="Engine.cs" />
-    <Compile Include="Input.cs" />
+    <Compile Include="Window\Input.cs" />
     <Compile Include="Object.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shader\Shader.cs" />
-    <Compile Include="Window.cs" />
+    <Compile Include="Window\Window.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

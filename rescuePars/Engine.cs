@@ -39,7 +39,6 @@ namespace rescuePars
             }, 6));
             obj.addComponent(new MeshRenderer());
             obj.getComponent<MeshRenderer>().init();
-
         }
 
         public void run()
@@ -49,24 +48,26 @@ namespace rescuePars
 
         void onUpdate()
         {
-           
-            if(Input.keyDown(Key.A))
-                cam.getComponent<Transform>().position-=Vector3.UnitX*0.1f;
-            else if (Input.keyDown(Key.D))
-                cam.getComponent<Transform>().position += Vector3.UnitX * 0.1f;
+            var camera = cam.getComponent<Camera>();
+            if (Input.keyDown(Key.A))
+                cam.getComponent<Transform>().position -= camera.Right * 0.1f;
+            if (Input.keyDown(Key.D))
+                cam.getComponent<Transform>().position += camera.Right * 0.1f;
+            if (Input.keyDown(Key.W))
+                cam.getComponent<Transform>().position += camera.Front * 0.1f;
+            if (Input.keyDown(Key.S))
+                cam.getComponent<Transform>().position -= camera.Front * 0.1f;
+            if (Input.keyDown(Key.Q))
+                cam.getComponent<Transform>().position -= camera.Up * 0.1f;
+            if (Input.keyDown(Key.E))
+                cam.getComponent<Transform>().position += camera.Up * 0.1f;
 
-            if (Input.getKeyDown(Key.Q))
-            {
-                System.Console.WriteLine("Q down");
-            }
-            if (Input.getKeyUp(Key.Q))
-            {
-                System.Console.WriteLine("Q up");
-            }
+            camera.cameraMouseLook(Input.mouseDeltaPos(), false);
             if (Input.keyDown(Key.Escape))
             {
                 window.close();
             }
+
             //System.Console.WriteLine("update has been called");
         }
 

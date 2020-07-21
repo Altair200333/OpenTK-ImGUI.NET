@@ -16,10 +16,10 @@ namespace rescuePars.ECS
         const float ZOOM = 60.0f;
         const float ASPECTR = 1.0f;
 
-        Vector3 Front;
-        Vector3 Up;
-        Vector3 Right;
-        Vector3 WorldUp = new Vector3(0.0f, 1.0f, 0.0f);
+        public Vector3 Front;
+        public Vector3 Up;
+        public Vector3 Right;
+        public Vector3 WorldUp = new Vector3(0.0f, 1.0f, 0.0f);
 
         float yaw = YAW;
 
@@ -47,13 +47,13 @@ namespace rescuePars.ECS
             Front = new Vector3(0.0f, 0.0f, -1.0f);
             updateCameraVectors();
         }
-        void cameraMouseLook(float xoffset, float yoffset, bool constrainPitch)
+        public void cameraMouseLook(Vector2 offset, bool constrainPitch)
         {
-            xoffset *= mouseSensitivity;
-            yoffset *= mouseSensitivity;
+            offset.X *= mouseSensitivity;
+            offset.Y *= mouseSensitivity;
 
-            yaw += xoffset;
-            pitch += yoffset;
+            yaw += offset.X;
+            pitch -= offset.Y;
 
             // Make sure that when pitch is out of bounds, screen doesn't get flipped
             if (constrainPitch)
