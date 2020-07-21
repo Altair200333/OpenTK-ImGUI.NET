@@ -10,3 +10,4 @@ E:\WORK\CSapps\rescuePars\rescuePars\bin\Release\OpenTK.GLControl.xml
 E:\WORK\CSapps\rescuePars\rescuePars\obj\Release\rescuePars.csproj.CopyComplete
 E:\WORK\CSapps\rescuePars\rescuePars\obj\Release\rescuePars.exe
 E:\WORK\CSapps\rescuePars\rescuePars\obj\Release\rescuePars.pdb
+E:\WORK\CSapps\rescuePars\rescuePars\obj\Release\rescuePars.csprojAssemblyReference.cache

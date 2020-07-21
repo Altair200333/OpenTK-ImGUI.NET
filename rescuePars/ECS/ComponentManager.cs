@@ -26,5 +26,10 @@ namespace rescuePars.ECS
 
             return components.TryGetValue(comp.getId(), out var value) ? (T) value : null;
         }
+        public void removeComponent<T>() where T : Component, new()
+        {
+            Component comp = new T();
+            components.Remove(comp.getId());
+        }
     }
 }

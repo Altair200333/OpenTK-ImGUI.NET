@@ -20,7 +20,8 @@ namespace rescuePars
         {
             window = new Window(1800, 900, "LearnOpenTK");
 
-            window.bindCallback(onUpdate);
+            window.bindUpdateCallback(onUpdate);
+            window.bindRenderCallback(onRender);
             obj = new Object();
             cam = new Object();
             cam.addComponent(new Transform(new Vector3(0, 0, 1)));
@@ -48,13 +49,30 @@ namespace rescuePars
 
         void onUpdate()
         {
-            obj.getComponent<MeshRenderer>().render(cam.getComponent<Camera>());
-            if(window.input.IsKeyDown(Key.A))
+           
+            if(Input.keyDown(Key.A))
                 cam.getComponent<Transform>().position-=Vector3.UnitX*0.1f;
-            else if (window.input.IsKeyDown(Key.D))
+            else if (Input.keyDown(Key.D))
                 cam.getComponent<Transform>().position += Vector3.UnitX * 0.1f;
 
+            if (Input.getKeyDown(Key.Q))
+            {
+                System.Console.WriteLine("Q down");
+            }
+            if (Input.getKeyUp(Key.Q))
+            {
+                System.Console.WriteLine("Q up");
+            }
+            if (Input.keyDown(Key.Escape))
+            {
+                window.close();
+            }
             //System.Console.WriteLine("update has been called");
+        }
+
+        void onRender()
+        {
+            obj.getComponent<MeshRenderer>().render(cam.getComponent<Camera>());
         }
     }
 }

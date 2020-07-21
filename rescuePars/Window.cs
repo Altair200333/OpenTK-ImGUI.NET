@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL4;
-using  OpenTK.Input;
+using OpenTK.Input;
+
 namespace rescuePars
 {
     public delegate void onUpdateCallback();
@@ -14,25 +15,38 @@ namespace rescuePars
     class Window : GameWindow
     {
         private Shader.Shader shader;
-        public KeyboardState input;
+
         private onUpdateCallback onUpdate;
+        private onUpdateCallback onRender;
 
         public static Vector4 clearColor = new Vector4(0.5f, 0.3f, 0.3f, 1.0f);
-        public Window(int width, int height, string title) : base(width, height, GraphicsMode.Default, title) { }
 
-        public void bindCallback(onUpdateCallback c)
+        public Window(int width, int height, string title) : base(width, height, GraphicsMode.Default, title)
         {
-            onUpdate = c;
+        }
+
+        public void bindUpdateCallback(onUpdateCallback call)
+        {
+            onUpdate = call;
+        }
+        public void bindRenderCallback(onUpdateCallback call)
+        {
+            onRender = call;
         }
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);
-            input = Keyboard.GetState();
+            Input.onUpdateFrame();
+
+            if (onUpdate != null)
+                onUpdate();
+
             
-            if (input.IsKeyDown(Key.Escape))
-            {
-                Exit();
-            }
+        }
+
+        public void close()
+        {
+            Exit();
         }
         protected override void OnLoad(EventArgs e)
         {
@@ -43,21 +57,24 @@ namespace rescuePars
 
             base.OnLoad(e);
         }
+
         protected override void OnRenderFrame(FrameEventArgs e)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
-            if (onUpdate != null)
-                onUpdate();
-                
+            if (onRender != null)
+                onRender();
+
             Context.SwapBuffers();
             base.OnRenderFrame(e);
         }
+
         protected override void OnResize(EventArgs e)
         {
             GL.Viewport(0, 0, Width, Height);
             base.OnResize(e);
         }
+
         protected override void OnUnload(EventArgs e)
         {
             // Unbind all the resources by binding the targets to 0/null.
