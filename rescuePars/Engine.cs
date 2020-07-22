@@ -37,6 +37,11 @@ namespace rescuePars
         void onUpdate()
         {
             var camera = scene.camera.getComponent<Camera>();
+
+            var d = Keyboard.GetState();
+            if(d.IsKeyDown(Key.K))
+                Console.WriteLine("S");
+
             if (Input.keyDown(MouseButton.Middle))
             {
                 

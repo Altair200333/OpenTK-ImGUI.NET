@@ -74,7 +74,7 @@ namespace rescuePars.ECS
         {
             var pos = owner.getComponent<Transform>().position;
 
-            float distance = Vector3.Distance(pos, Pivot);
+            float distance = (pos - Pivot).Length;
             cameraMouseLook(offset, true);
 
             pos = Pivot - front * distance;
