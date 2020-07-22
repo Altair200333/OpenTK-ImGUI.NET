@@ -138,6 +138,7 @@
     <Compile Include="ECS\CameraController.cs" />
     <Compile Include="ECS\Component.cs" />
     <Compile Include="ECS\ComponentManager.cs" />
+    <Compile Include="ECS\Material.cs" />
     <Compile Include="ECS\Mesh.cs" />
     <Compile Include="ECS\MeshRenderer.cs" />
     <Compile Include="ECS\Transform.cs" />

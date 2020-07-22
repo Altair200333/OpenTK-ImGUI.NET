@@ -120,19 +120,29 @@ namespace rescuePars
                 {
                     foreach (var obj in scene.objects)
                     {
-                      
-                        ImGui.PushID(obj.name+scene.objects.IndexOf(obj));
+                        ImGui.PushID(obj.name + scene.objects.IndexOf(obj));
                         if (ImGui.TreeNode(obj.name))
                         {
                             ImGui.Text("Position");
-                            Vector3 pos = obj.getComponent<Transform>().position;
-                            System.Numerics.Vector3 v = new System.Numerics.Vector3(pos.X, pos.Y, pos.Z);;
-                            ImGui.DragFloat3("Position",ref v, 0.1f);
+
+                            Vector3 tmp = obj.getComponent<Transform>().position;
+                            System.Numerics.Vector3 v = new System.Numerics.Vector3(tmp.X, tmp.Y, tmp.Z);
+                            ;
+                            ImGui.DragFloat3("Position", ref v, 0.1f);
                             obj.getComponent<Transform>().position = new Vector3(v.X, v.Y, v.Z);
-                            System.Numerics.Vector3 color = new System.Numerics.Vector3(1);
-                            ImGui.ColorEdit3("lab", ref color);
+
+                            if (obj.getComponent<Material>() != null)
+                            {
+                                tmp = obj.getComponent<Material>().color;
+                                System.Numerics.Vector3 v2 = new System.Numerics.Vector3(tmp.X, tmp.Y, tmp.Z);
+
+                                ImGui.ColorEdit3("lab", ref v2);
+                                obj.getComponent<Material>().color = new Vector3(v2.X, v2.Y, v2.Z);
+                            }
+
                             ImGui.TreePop();
                         }
+
                         ImGui.PopID();
                     }
 
