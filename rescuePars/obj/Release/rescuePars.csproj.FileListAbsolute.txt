@@ -11,3 +11,14 @@ E:\WORK\CSapps\rescuePars\rescuePars\obj\Release\rescuePars.csproj.CopyComplete
 E:\WORK\CSapps\rescuePars\rescuePars\obj\Release\rescuePars.exe
 E:\WORK\CSapps\rescuePars\rescuePars\obj\Release\rescuePars.pdb
 E:\WORK\CSapps\rescuePars\rescuePars\obj\Release\rescuePars.csprojAssemblyReference.cache
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Release\cimgui.dll
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Release\ImGui.NET.dll
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Release\System.Buffers.dll
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Release\System.Drawing.Common.dll
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Release\System.Numerics.Vectors.dll
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Release\System.Reflection.TypeExtensions.dll
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Release\ImGui.NET.xml
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Release\System.Buffers.xml
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Release\System.Numerics.Vectors.xml
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Release\System.Runtime.CompilerServices.Unsafe.xml

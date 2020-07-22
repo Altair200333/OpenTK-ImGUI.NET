@@ -17,7 +17,9 @@ namespace rescuePars
 
         public Engine()
         {
-            window = new Window(1800, 900, "LearnOpenTK");
+            GraphicsMode mode = new GraphicsMode(new ColorFormat(24), 16, 8, 4, new ColorFormat(32), 2, false);
+
+            window = new Window(1800, 900, "LearnOpenTK", mode);
             window.bindUpdateCallback(onUpdate);
             window.bindRenderCallback(onRender);
             scene = new Scene();
@@ -37,10 +39,6 @@ namespace rescuePars
         void onUpdate()
         {
             var camera = scene.camera.getComponent<Camera>();
-
-            var d = Keyboard.GetState();
-            if(d.IsKeyDown(Key.K))
-                Console.WriteLine("S");
 
             if (Input.keyDown(MouseButton.Middle))
             {

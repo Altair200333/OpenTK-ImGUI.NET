@@ -49,7 +49,10 @@ namespace rescuePars
         {
             return deltaMouse;
         }
-
+        public static Vector2 mousePosition()
+        {
+            return mousePos;
+        }
         ///<summary>user is holding key down</summary>
         public static bool keyDown(Key key)
         {

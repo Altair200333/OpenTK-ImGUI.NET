@@ -16,5 +16,9 @@ E:\WORK\CSapps\rescuePars\rescuePars\bin\Debug\System.Runtime.CompilerServices.U
 E:\WORK\CSapps\rescuePars\rescuePars\bin\Debug\System.Buffers.xml
 E:\WORK\CSapps\rescuePars\rescuePars\bin\Debug\System.Numerics.Vectors.xml
 E:\WORK\CSapps\rescuePars\rescuePars\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-E:\WORK\CSapps\rescuePars\rescuePars\obj\Debug\rescuePars.csprojAssemblyReference.cache
 E:\WORK\CSapps\rescuePars\rescuePars\bin\Debug\OpenTK.pdb
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Debug\cimgui.dll
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Debug\ImGui.NET.dll
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Debug\ImGui.NET.xml
+E:\WORK\CSapps\rescuePars\rescuePars\bin\Debug\System.Drawing.Common.dll
+E:\WORK\CSapps\rescuePars\rescuePars\obj\Debug\rescuePars.csprojAssemblyReference.cache
