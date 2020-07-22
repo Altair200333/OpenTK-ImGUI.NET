@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
+using OpenTK.Graphics.ES30;
 
 namespace rescuePars.ECS
 {
@@ -23,6 +24,8 @@ namespace rescuePars.ECS
         public Vector3 up;
         public Vector3 right;
         public Vector3 WorldUp = new Vector3(0.0f, 1.0f, 0.0f);
+
+        public Vector3 Pivot = new Vector3(0, 0, 0);
 
         float yaw = YAW;
         float pitch = PITCH;
@@ -67,6 +70,16 @@ namespace rescuePars.ECS
 
             updateCameraVectors();
         }
+        public void rotateAroundPivot(Vector2 offset)
+        {
+            var pos = owner.getComponent<Transform>().position;
+
+            float distance = Vector3.Distance(pos, Pivot);
+            cameraMouseLook(offset, true);
+
+            pos = Pivot - front * distance;
+            owner.getComponent<Transform>().position = pos;
+        }
         public Matrix4 getViewMatrix()
         {
             Vector3 pos = owner.getComponent<Transform>().position;
@@ -78,15 +91,14 @@ namespace rescuePars.ECS
         }
         void updateCameraVectors()
         {
-            // Calculate the new Front vector
             Vector3 front = new Vector3();
             front.X = (float) (Math.Cos(Radians(yaw)) * Math.Cos(Radians(pitch)));
             front.Y = (float) Math.Sin(Radians(pitch));
             front.Z = (float) (Math.Sin(Radians(yaw)) * Math.Cos(Radians(pitch)));
             this.front = Vector3.Normalize(front);
-            // Also re-calculate the Right and Up vector
+
             right = Vector3.Normalize(Vector3.Cross(this.front,
-                WorldUp)); // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
+                WorldUp)); 
             up = Vector3.Normalize(Vector3.Cross(right, this.front));
         }
     }

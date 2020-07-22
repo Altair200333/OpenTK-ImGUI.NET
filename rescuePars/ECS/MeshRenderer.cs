@@ -71,7 +71,7 @@ namespace rescuePars.ECS
             shader.setVec3("diffuse", new Vector3(1, 0.5f, 0.3f));
 
             // view/projection transformations
-            Matrix4 projection = OpenTK.Matrix4.CreatePerspectiveFieldOfView(Camera.Radians(camera.zoom), camera.aspectRatio, 0.1f, 1000.0f);
+            Matrix4 projection = Matrix4.CreatePerspectiveFieldOfView(Camera.Radians(camera.zoom), camera.aspectRatio, 0.1f, 1000.0f);
             Matrix4 view = camera.getViewMatrix();
             shader.setMat4("projection", projection);
             shader.setMat4("view", view);

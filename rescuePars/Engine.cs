@@ -37,20 +37,24 @@ namespace rescuePars
         void onUpdate()
         {
             var camera = scene.camera.getComponent<Camera>();
-            if (Input.keyDown(Key.A))
-                camera.owner.getComponent<Transform>().position -= camera.right * 0.1f;
-            if (Input.keyDown(Key.D))
-                camera.owner.getComponent<Transform>().position += camera.right * 0.1f;
-            if (Input.keyDown(Key.W))
-                camera.owner.getComponent<Transform>().position += camera.front * 0.1f;
-            if (Input.keyDown(Key.S))
-                camera.owner.getComponent<Transform>().position -= camera.front * 0.1f;
-            if (Input.keyDown(Key.Q))
-                camera.owner.getComponent<Transform>().position -= camera.up * 0.1f;
-            if (Input.keyDown(Key.E))
-                camera.owner.getComponent<Transform>().position += camera.up * 0.1f;
+            if (Input.keyDown(MouseButton.Middle))
+            {
+                
+                if (Input.keyDown(Key.ShiftLeft))
+                {
+                    Vector2 mouseShift = Input.mouseDeltaPos();
+                    Vector3 shift = -camera.right * mouseShift.X * 0.01f + camera.up * mouseShift.Y * 0.01f;
+                    camera.owner.getComponent<Transform>().position += shift;
+                    camera.Pivot += shift;
+                }
+                else
+                {
+                    camera.rotateAroundPivot(Input.mouseDeltaPos());
+                }
 
-            camera.cameraMouseLook(Input.mouseDeltaPos(), true);
+            }
+            camera.owner.getComponent<Transform>().position += Input.mouseWheel() * camera.front;
+
             if (Input.keyDown(Key.Escape))
             {
                 window.close();

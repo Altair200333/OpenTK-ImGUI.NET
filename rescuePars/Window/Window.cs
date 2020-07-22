@@ -29,10 +29,12 @@ namespace rescuePars
         {
             onUpdate = call;
         }
+
         public void bindRenderCallback(onUpdateCallback call)
         {
             onRender = call;
         }
+
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);
@@ -40,27 +42,24 @@ namespace rescuePars
 
             if (onUpdate != null)
                 onUpdate();
-
-            
         }
 
         public void close()
         {
             Exit();
         }
+
         protected override void OnLoad(EventArgs e)
         {
             GL.ClearColor(clearColor.X, clearColor.Y, clearColor.Z, clearColor.W);
-
-            //Code goes here
-            shader = new Shader.Shader("Shader/vertex.vs", "Shader/fragment.fs");
+            GL.Enable(EnableCap.DepthTest);
 
             base.OnLoad(e);
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
         {
-            GL.Clear(ClearBufferMask.ColorBufferBit);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             if (onRender != null)
                 onRender();
@@ -82,7 +81,7 @@ namespace rescuePars
             GL.BindVertexArray(0);
             GL.UseProgram(0);
 
-            GL.DeleteProgram(shader.ID);
+            //GL.DeleteProgram(shader.ID);
             base.OnUnload(e);
         }
     }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
 using rescuePars.ECS;
+using rescuePars.Loaders;
 
 namespace rescuePars
 {
@@ -23,15 +24,7 @@ namespace rescuePars
             obj = new Object();
             
             obj.addComponent(new Transform(new Vector3(0, 0, -2)));
-            obj.addComponent(new Mesh(new float[]
-            {
-                0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
-                -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
-                -0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
-                0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
-                0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
-                -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f
-            }, 6));
+            obj.addComponent(new STLMeshLoader().load("mod.stl"));
             obj.addComponent(new MeshRenderer());
             obj.getComponent<MeshRenderer>().init();
 
