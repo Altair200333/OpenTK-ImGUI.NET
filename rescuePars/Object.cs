@@ -13,7 +13,7 @@ namespace rescuePars
     class Object
     {
         public ComponentManager componentManager;
-
+        public string name = "Object";
         public Object()
         {
             componentManager = new ComponentManager();

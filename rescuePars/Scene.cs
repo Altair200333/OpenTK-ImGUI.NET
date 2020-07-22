@@ -27,7 +27,14 @@ namespace rescuePars
             obj.addComponent(new STLMeshLoader().load("mod.stl"));
             obj.addComponent(new MeshRenderer());
             obj.getComponent<MeshRenderer>().init();
+            objects.Add(obj);
 
+            obj = new Object();
+
+            obj.addComponent(new Transform(new Vector3(0, 0, 3)));
+            obj.addComponent(new STLMeshLoader().load("mod2.stl"));
+            obj.addComponent(new MeshRenderer());
+            obj.getComponent<MeshRenderer>().init();
             objects.Add(obj);
             camera = cam;
         }

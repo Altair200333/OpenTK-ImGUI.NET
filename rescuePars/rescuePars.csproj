@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ImGui.NET, Version=1.75.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -133,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ECS\Camera.cs" />
+    <Compile Include="ECS\CameraController.cs" />
     <Compile Include="ECS\Component.cs" />
     <Compile Include="ECS\ComponentManager.cs" />
     <Compile Include="ECS\Mesh.cs" />

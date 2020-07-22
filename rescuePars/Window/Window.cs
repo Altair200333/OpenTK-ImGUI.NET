@@ -13,7 +13,7 @@ using rescuePars.GUI;
 
 namespace rescuePars
 {
-    public delegate void onUpdateCallback();
+    public delegate void onEventCallback();
 
     public class Window : GameWindow
     {
@@ -21,8 +21,9 @@ namespace rescuePars
 
         private Shader.Shader shader;
 
-        private onUpdateCallback onUpdate;
-        private onUpdateCallback onRender;
+        private onEventCallback _onEvent;
+        private onEventCallback onRender;
+        private onEventCallback onDrawGUI;
 
         public static Vector4 clearColor = new Vector4(0.5f, 0.3f, 0.3f, 1.0f);
 
@@ -33,23 +34,25 @@ namespace rescuePars
         {
         }
 
-        public void bindUpdateCallback(onUpdateCallback call)
+        public void bindUpdateCallback(onEventCallback call)
         {
-            onUpdate = call;
+            _onEvent = call;
         }
 
-        public void bindRenderCallback(onUpdateCallback call)
+        public void bindRenderCallback(onEventCallback call)
         {
             onRender = call;
         }
-
+        public void bindDrawGUICallback(onEventCallback call)
+        {
+            onDrawGUI = call;
+        }
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);
             Input.onUpdateFrame();
 
-            if (onUpdate != null)
-                onUpdate();
+            _onEvent?.Invoke();
         }
 
         public void close()
@@ -76,7 +79,8 @@ namespace rescuePars
             GL.Enable(EnableCap.DepthTest);
 
             onRender?.Invoke();
-            ImGui.ShowDemoWindow();
+            onDrawGUI?.Invoke();
+            
             _controller.Render();
             Context.SwapBuffers();
         }

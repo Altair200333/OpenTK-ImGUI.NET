@@ -15,8 +15,7 @@ namespace rescuePars.ECS
     {
         const float YAW = -90.0f;
         const float PITCH = 0.0f;
-        const float SPEED = 10.3f;
-        const float SENSITIVITY = 0.1f;
+
         const float ZOOM = 60.0f;
         const float ASPECTR = 1.0f;
 
@@ -25,14 +24,10 @@ namespace rescuePars.ECS
         public Vector3 right;
         public Vector3 WorldUp = new Vector3(0.0f, 1.0f, 0.0f);
 
-        public Vector3 Pivot = new Vector3(0, 0, 0);
-
-        float yaw = YAW;
-        float pitch = PITCH;
+        public float yaw = YAW;
+        public float pitch = PITCH;
 
         // Camera options
-        float movementSpeed = SPEED;
-        float mouseSensitivity = SENSITIVITY;
         public float zoom = ZOOM;
         public float aspectRatio = ASPECTR;
 
@@ -52,34 +47,7 @@ namespace rescuePars.ECS
             this.front = front;
             updateCameraVectors();
         }
-        public void cameraMouseLook(Vector2 offset, bool constrainPitch)
-        {
-            offset.X *= mouseSensitivity;
-            offset.Y *= mouseSensitivity;
-
-            yaw += offset.X;
-            pitch -= offset.Y;
-
-            if (constrainPitch)
-            {
-                if (pitch > 89.0f)
-                    pitch = 89.0f;
-                if (pitch < -89.0f)
-                    pitch = -89.0f;
-            }
-
-            updateCameraVectors();
-        }
-        public void rotateAroundPivot(Vector2 offset)
-        {
-            var pos = owner.getComponent<Transform>().position;
-
-            float distance = (pos - Pivot).Length;
-            cameraMouseLook(offset, true);
-
-            pos = Pivot - front * distance;
-            owner.getComponent<Transform>().position = pos;
-        }
+        
         public Matrix4 getViewMatrix()
         {
             Vector3 pos = owner.getComponent<Transform>().position;
@@ -89,7 +57,7 @@ namespace rescuePars.ECS
         {
             return (float) ((Math.PI / 180) * angle);
         }
-        void updateCameraVectors()
+        public void updateCameraVectors()
         {
             Vector3 front = new Vector3();
             front.X = (float) (Math.Cos(Radians(yaw)) * Math.Cos(Radians(pitch)));
