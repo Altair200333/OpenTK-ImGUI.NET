@@ -19,9 +19,7 @@ namespace rescuePars
     {
         ImGuiController _controller;
 
-        private Shader.Shader shader;
-
-        private onEventCallback _onEvent;
+        private onEventCallback onUpdate;
         private onEventCallback onRender;
         private onEventCallback onDrawGUI;
 
@@ -36,7 +34,7 @@ namespace rescuePars
 
         public void bindUpdateCallback(onEventCallback call)
         {
-            _onEvent = call;
+            onUpdate = call;
         }
 
         public void bindRenderCallback(onEventCallback call)
@@ -52,7 +50,7 @@ namespace rescuePars
             base.OnUpdateFrame(e);
             Input.onUpdateFrame();
 
-            _onEvent?.Invoke();
+            onUpdate?.Invoke();
         }
 
         public void close()
@@ -95,12 +93,6 @@ namespace rescuePars
 
         protected override void OnUnload(EventArgs e)
         {
-            // Unbind all the resources by binding the targets to 0/null.
-            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-            GL.BindVertexArray(0);
-            GL.UseProgram(0);
-
-            //GL.DeleteProgram(shader.ID);
             base.OnUnload(e);
         }
 

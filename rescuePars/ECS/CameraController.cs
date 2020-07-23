@@ -11,10 +11,7 @@ namespace rescuePars.ECS
     {
         public Vector3 pivot;
         public float mouseSensitivity = 0.1f;
-        public override int getId()
-        {
-            return 5;
-        }
+        
         public CameraController() { }
         public void cameraMouseLook(Vector2 offset, bool constrainPitch)
         {

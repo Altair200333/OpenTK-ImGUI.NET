@@ -9,28 +9,28 @@ namespace rescuePars.ECS
     /// <summary>Class responsible for handling components i.e. add, delete, get</summary>
     class ComponentManager
     {
-        private Dictionary<int, Component> components;
+        private Dictionary<Type, Component> components;
 
         public ComponentManager()
         {
-            components = new Dictionary<int, Component>();
+            components = new Dictionary<Type, Component>();
         }
 
         public void addComponent(Component comp)
         {
-            components[comp.getId()] = comp;
+            components[comp.GetType()] = comp;
         }
 
         public T getComponent<T>() where T : Component, new()
         {
             Component comp = new T();
 
-            return components.TryGetValue(comp.getId(), out var value) ? (T) value : null;
+            return components.TryGetValue(typeof(T), out var value) ? (T) value : null;
         }
         public void removeComponent<T>() where T : Component, new()
         {
             Component comp = new T();
-            components.Remove(comp.getId());
+            components.Remove(typeof(T));
         }
     }
 }

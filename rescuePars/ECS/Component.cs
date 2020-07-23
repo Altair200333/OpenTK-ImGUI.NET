@@ -11,8 +11,5 @@ namespace rescuePars.ECS
     {
         /// <summary>The object current component is attached to. Can be null</summary>
         public Object owner = null;
-
-        public abstract int getId();
-
     }
 }

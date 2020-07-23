@@ -55,7 +55,6 @@ namespace rescuePars.Shader
 
         ~Shader()
         {
-            //GL.DeleteProgram(ID);
         }
         //call before setting uniform variables or using shader
         public void use()
@@ -93,5 +92,7 @@ namespace rescuePars.Shader
         {
             GL.UniformMatrix4(GL.GetUniformLocation(ID, name), false, ref value);
         }
+
+        
     }
 }

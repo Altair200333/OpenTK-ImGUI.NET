@@ -31,11 +31,6 @@ namespace rescuePars.ECS
         public float zoom = ZOOM;
         public float aspectRatio = ASPECTR;
 
-        public override int getId()
-        {
-            return 1;
-        }
-
 
         public Camera()
         {

@@ -10,16 +10,15 @@ namespace rescuePars.ECS
     class Transform : Component
     {
         public Vector3 position;
-        public override int getId()
-        {
-            return 2;
-        }
-        
+
+
         public Transform(Vector3 _position)
         {
             position = _position;
         }
-        public Transform() :this(new Vector3( 0,0,0)) 
-        {}
+
+        public Transform() : this(new Vector3(0, 0, 0))
+        {
+        }
     }
 }

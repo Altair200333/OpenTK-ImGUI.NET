@@ -16,10 +16,6 @@ namespace rescuePars.ECS
         Matrix4 model;
         int VBO, VAO;
 
-        public override int getId()
-        {
-            return 4;
-        }
 
         public MeshRenderer()
         {
@@ -85,5 +81,6 @@ namespace rescuePars.ECS
             GL.BindVertexArray(VAO);
             GL.DrawArrays(PrimitiveType.Triangles, 0, owner.getComponent<Mesh>().vertexCount);
         }
-	}
+
+    }
 }

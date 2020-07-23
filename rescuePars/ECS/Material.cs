@@ -20,9 +20,5 @@ namespace rescuePars.ECS
         {
         }
 
-        public override int getId()
-        {
-            return 6;
-        }
     }
 }

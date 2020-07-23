@@ -8,11 +8,7 @@ namespace rescuePars.ECS
 {
     class Mesh : Component
     {
-        public override int getId()
-        {
-            return 3;
-        }
-
+        
         public float[] vertices;
         public int vertexCount;
 
