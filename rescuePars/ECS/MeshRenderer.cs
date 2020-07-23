@@ -11,7 +11,7 @@ namespace rescuePars.ECS
     /// <summary>Component responsible for drawing mesh component attached to object</summary>
     class MeshRenderer : Component
     {
-        Shader.Shader shader;
+        public Shader.Shader shader;
 
         Matrix4 model;
         int VBO, VAO;

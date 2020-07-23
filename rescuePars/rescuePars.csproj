@@ -143,10 +143,10 @@
     <Compile Include="ECS\MeshRenderer.cs" />
     <Compile Include="ECS\Transform.cs" />
     <Compile Include="Engine.cs" />
-    <Compile Include="GUI\GUIShader.cs" />
-    <Compile Include="GUI\ImGuiController.cs" />
-    <Compile Include="GUI\Texture.cs" />
-    <Compile Include="GUI\Util.cs" />
+    <Compile Include="GUI\ImGUINetWrap\GUIShader.cs" />
+    <Compile Include="GUI\ImGUINetWrap\ImGuiController.cs" />
+    <Compile Include="GUI\ImGUINetWrap\Texture.cs" />
+    <Compile Include="GUI\ImGUINetWrap\Util.cs" />
     <Compile Include="Loaders\MeshLoader.cs" />
     <Compile Include="Loaders\STLMeshLoader.cs" />
     <Compile Include="Scene.cs" />

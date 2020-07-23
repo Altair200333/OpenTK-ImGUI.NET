@@ -71,8 +71,7 @@ namespace rescuePars
             base.OnRenderFrame(e);
             _controller.Update(this, (float)e.Time);
 
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit |
-                     ClearBufferMask.StencilBufferBit);
+            clear();
 
             GL.Enable(EnableCap.DepthTest);
 
@@ -83,6 +82,18 @@ namespace rescuePars
             Context.SwapBuffers();
         }
 
+        public void clear()
+        {
+            GL.ClearColor(clearColor.X, clearColor.Y, clearColor.Z, clearColor.W);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit |
+                     ClearBufferMask.StencilBufferBit);
+        }
+        public void clear(Vector3 color)
+        {
+            GL.ClearColor(color.X,color.Y, color.Z, clearColor.W);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit |
+                     ClearBufferMask.StencilBufferBit);
+        }
         protected override void OnResize(EventArgs e)
         {
             GL.Viewport(0, 0, Width, Height);

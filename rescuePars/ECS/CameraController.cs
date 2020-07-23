@@ -7,12 +7,17 @@ using OpenTK;
 
 namespace rescuePars.ECS
 {
-    class CameraController:Component
+    class CameraController : Component
     {
         public Vector3 pivot;
+        public Vector3 shift;
         public float mouseSensitivity = 0.1f;
-        
-        public CameraController() { }
+
+        public CameraController()
+        {
+            shift = new Vector3(0, 0, 0);
+        }
+
         public void cameraMouseLook(Vector2 offset, bool constrainPitch)
         {
             Camera camera = owner.getComponent<Camera>();
@@ -32,16 +37,17 @@ namespace rescuePars.ECS
 
             camera.updateCameraVectors();
         }
+
         public void rotateAroundPivot(Vector2 offset)
         {
             Camera camera = owner.getComponent<Camera>();
 
             var pos = owner.getComponent<Transform>().position;
 
-            float distance = (pos - pivot).Length;
+            float distance = (pos - (pivot + shift)).Length;
             cameraMouseLook(offset, true);
 
-            pos = pivot - camera.front * distance;
+            pos = pivot + shift - camera.front * distance;
             owner.getComponent<Transform>().position = pos;
         }
     }

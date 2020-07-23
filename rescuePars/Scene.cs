@@ -26,6 +26,8 @@ namespace rescuePars
             obj.addComponent(new Transform(new Vector3(0, 0, -2)));
             obj.addComponent(new STLMeshLoader().load("mod.stl"));
             obj.addComponent(new MeshRenderer());
+            obj.addComponent(new Material(new Vector3(0.9f, 0.5f, 0.3f)));
+
             obj.getComponent<MeshRenderer>().init();
             objects.Add(obj);
 
@@ -33,6 +35,15 @@ namespace rescuePars
 
             obj.addComponent(new Transform(new Vector3(0, 0, 3)));
             obj.addComponent(new STLMeshLoader().load("mod2.stl"));
+            obj.addComponent(new Material(new Vector3(0, 0.5f, 0.3f)));
+            obj.addComponent(new MeshRenderer());
+            obj.getComponent<MeshRenderer>().init();
+            objects.Add(obj);
+
+            obj = new Object();
+
+            obj.addComponent(new Transform(new Vector3(-4, 0, -3)));
+            obj.addComponent(new STLMeshLoader().load("mod3.stl"));
             obj.addComponent(new Material(new Vector3(0, 0.5f, 0.3f)));
             obj.addComponent(new MeshRenderer());
             obj.getComponent<MeshRenderer>().init();

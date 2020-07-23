@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ImGuiNET;
 using OpenTK;
 using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL4;
 using OpenTK.Input;
 using rescuePars.ECS;
 
@@ -15,6 +16,7 @@ namespace rescuePars
     {
         Window window;
         public Scene scene;
+        private Object active = null;
 
         public Engine()
         {
@@ -53,7 +55,7 @@ namespace rescuePars
                     Vector2 mouseShift = Input.mouseDeltaPos();
                     Vector3 shift = -camera.right * mouseShift.X * 0.01f + camera.up * mouseShift.Y * 0.01f;
                     camera.owner.getComponent<Transform>().position += shift;
-                    camera.owner.getComponent<CameraController>().pivot += shift;
+                    camera.owner.getComponent<CameraController>().shift += shift;
                 }
                 else
                 {
@@ -67,14 +69,67 @@ namespace rescuePars
             {
                 window.close();
             }
+
+            if (active != null)
+            {
+
+                float distance = (scene.camera.getComponent<CameraController>().pivot +
+                                  scene.camera.getComponent<CameraController>().shift -
+                                  scene.camera.getComponent<Transform>().position).Length;
+
+                scene.camera.getComponent<CameraController>().pivot = Vector3.Lerp(
+                    scene.camera.getComponent<CameraController>().pivot,
+                    active.getComponent<Transform>().position, 0.1f);
+                scene.camera.getComponent<Transform>().position =
+                    scene.camera.getComponent<CameraController>().pivot +
+                    scene.camera.getComponent<CameraController>().shift - camera.front * distance;
+            }
         }
 
         /// <summary>onUpdate is called when window draws new frame</summary>
         void onRender()
         {
+            mousePick();
             foreach (var obj in scene.objects)
             {
                 obj.getComponent<MeshRenderer>().render(scene.camera.getComponent<Camera>());
+            }
+        }
+
+        private void mousePick()
+        {
+            if (Input.getKeyDown(MouseButton.Left))
+            {
+                window.clear(new Vector3(0, 0, 0));
+                for (int i = 0; i < scene.objects.Count; i++)
+                {
+                    Vector3 color = scene.objects[i].getComponent<Material>().color;
+                    int id = i + 1;
+                    scene.objects[i].getComponent<Material>().color = new Vector3((float) id / 255, 0, 0);
+                    scene.objects[i].getComponent<MeshRenderer>().shader.use();
+                    scene.objects[i].getComponent<MeshRenderer>().shader.setInt("val", 0);
+
+                    scene.objects[i].getComponent<MeshRenderer>().render(scene.camera.getComponent<Camera>());
+
+                    scene.objects[i].getComponent<MeshRenderer>().shader.setInt("val", 1);
+
+                    scene.objects[i].getComponent<Material>().color = color;
+                }
+
+                Byte[] Pixel = new Byte[4];
+                var cursorPos = Mouse.GetCursorState();
+
+                GL.ReadPixels(cursorPos.X - window.X, window.Height - (cursorPos.Y - window.Y), 1, 1, PixelFormat.Rgba,
+                    PixelType.UnsignedByte, Pixel);
+                int index = Pixel[0] - 1;
+
+                if (index != -1)
+                {
+                    Console.WriteLine("selected " + index);
+                    active = scene.objects[index];
+                }
+
+                window.clear();
             }
         }
 
@@ -82,7 +137,7 @@ namespace rescuePars
 
         void onDrawGUI()
         {
-            ImGui.ShowDemoWindow();
+            //ImGui.ShowDemoWindow();
 
             if (ImGui.BeginMainMenuBar())
             {
