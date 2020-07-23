@@ -21,15 +21,12 @@ namespace rescuePars.ECS
             components[comp.GetType()] = comp;
         }
 
-        public T getComponent<T>() where T : Component, new()
+        public T getComponent<T>() where T : Component
         {
-            Component comp = new T();
-
             return components.TryGetValue(typeof(T), out var value) ? (T) value : null;
         }
-        public void removeComponent<T>() where T : Component, new()
+        public void removeComponent<T>() where T : Component
         {
-            Component comp = new T();
             components.Remove(typeof(T));
         }
     }
