@@ -10,6 +10,7 @@ namespace rescuePars.ECS
     class CameraController : Component
     {
         public Vector3 pivot;
+        public Vector3 targetPivot;
         public Vector3 shift;
         public float mouseSensitivity = 0.1f;
 

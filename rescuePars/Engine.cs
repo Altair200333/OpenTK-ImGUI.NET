@@ -56,6 +56,7 @@ namespace rescuePars
                     Vector3 shift = -camera.right * mouseShift.X * 0.01f + camera.up * mouseShift.Y * 0.01f;
                     camera.owner.getComponent<Transform>().position += shift;
                     camera.owner.getComponent<CameraController>().shift += shift;
+                    camera.owner.getComponent<CameraController>().targetPivot += shift;
                 }
                 else
                 {
@@ -70,6 +71,9 @@ namespace rescuePars
                 window.close();
             }
 
+            scene.camera.getComponent<CameraController>().shift = Vector3.Lerp(
+                scene.camera.getComponent<CameraController>().shift,
+                scene.camera.getComponent<CameraController>().targetPivot, 0.1f);
             if (active != null)
             {
 
@@ -126,6 +130,7 @@ namespace rescuePars
                 if (index != -1)
                 {
                     Console.WriteLine("selected " + index);
+                    scene.camera.getComponent<CameraController>().targetPivot = new Vector3(0);
                     active = scene.objects[index];
                 }
 
