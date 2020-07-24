@@ -19,6 +19,11 @@ namespace rescuePars.ECS
             shift = new Vector3(0, 0, 0);
         }
 
+        public void pan(Vector3 pan)
+        {
+            shift += pan;
+            targetPivot += pan;
+        }
         public void cameraMouseLook(Vector2 offset, bool constrainPitch)
         {
             Camera camera = owner.getComponent<Camera>();

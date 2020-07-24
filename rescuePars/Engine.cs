@@ -55,8 +55,7 @@ namespace rescuePars
                     Vector2 mouseShift = Input.mouseDeltaPos();
                     Vector3 shift = -camera.right * mouseShift.X * 0.01f + camera.up * mouseShift.Y * 0.01f;
                     camera.owner.getComponent<Transform>().position += shift;
-                    camera.owner.getComponent<CameraController>().shift += shift;
-                    camera.owner.getComponent<CameraController>().targetPivot += shift;
+                    camera.owner.getComponent<CameraController>().pan(shift);
                 }
                 else
                 {
@@ -76,7 +75,6 @@ namespace rescuePars
                 scene.camera.getComponent<CameraController>().targetPivot, 0.1f);
             if (active != null)
             {
-
                 float distance = (scene.camera.getComponent<CameraController>().pivot +
                                   scene.camera.getComponent<CameraController>().shift -
                                   scene.camera.getComponent<Transform>().position).Length;
@@ -84,6 +82,7 @@ namespace rescuePars
                 scene.camera.getComponent<CameraController>().pivot = Vector3.Lerp(
                     scene.camera.getComponent<CameraController>().pivot,
                     active.getComponent<Transform>().position, 0.1f);
+
                 scene.camera.getComponent<Transform>().position =
                     scene.camera.getComponent<CameraController>().pivot +
                     scene.camera.getComponent<CameraController>().shift - camera.front * distance;
