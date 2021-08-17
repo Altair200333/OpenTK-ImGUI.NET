@@ -24,7 +24,7 @@ namespace rescuePars
             Object cam = new Object();
             obj = new Object();
             
-            obj.addComponent(new Transform(new Vector3(0, 0, -2)));
+            obj.addComponent(new Transform(new Vector3(0, 0, -5)));
             obj.addComponent(new STLMeshLoader().load("mod.stl"));
             obj.addComponent(new MeshRenderer());
             obj.addComponent(new Material(new Vector3(0.9f, 0.5f, 0.3f)));
@@ -34,7 +34,7 @@ namespace rescuePars
 
             obj = new Object();
 
-            obj.addComponent(new Transform(new Vector3(0, 0, 3)));
+            obj.addComponent(new Transform(new Vector3(0, 0, 0)));
             obj.addComponent(new STLMeshLoader().load("cube.stl"));
             obj.addComponent(new Material(new Vector3(0, 0.5f, 0.3f)));
             obj.addComponent(new MeshRenderer());

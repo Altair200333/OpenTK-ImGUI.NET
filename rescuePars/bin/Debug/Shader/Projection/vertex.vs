@@ -17,7 +17,7 @@ void main()
     localV = vec3(aPos);
     FragPos = vec3(model * vec4(aPos, 1.0));
     Normal = mat3(transpose(inverse(model))) * aNormal;  
-    camPosObj = vec3(inverse(model)*inverse(view)*vec4(viewPos, 1.0));
+    camPosObj = vec3(inverse(model)*vec4(viewPos, 1.0));
 
     gl_Position = projection * view * vec4(FragPos, 1.0);
 }

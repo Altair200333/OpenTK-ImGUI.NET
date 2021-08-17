@@ -16,7 +16,7 @@ void main()
     if(val == 1) 
     {
         vec3 viewDir = localV - camPosObj;
-        res = vec4(abs(viewDir.x), 0, 0, 0.3f);
+        res = vec4(abs(viewDir.x), 0, 0, 0.7f);
     }
     else 
     	res = vec4(diffuse, 1.0);

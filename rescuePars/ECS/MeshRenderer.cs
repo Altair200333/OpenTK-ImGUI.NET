@@ -79,7 +79,7 @@ namespace rescuePars.ECS
             }
             shader.use();
             shader.setVec3("viewPos", camera.owner.getComponent<Transform>().position);
-
+            Console.WriteLine(camera.owner.getComponent<Transform>().position);
             Material mat = owner.getComponent<Material>();
             // material properties
             shader.setVec3("diffuse", mat?.color ?? new Vector3(1, 0.5f, 0.3f));
