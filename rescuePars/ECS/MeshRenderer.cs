@@ -8,6 +8,13 @@ using OpenTK.Graphics.OpenGL4;
 
 namespace rescuePars.ECS
 {
+    abstract class RendererExtension
+    {
+        public abstract void init(MeshRenderer renderer);
+        public abstract void onRender();
+
+    }
+
     /// <summary>Component responsible for drawing mesh component attached to object</summary>
     class MeshRenderer : Component
     {
@@ -18,6 +25,7 @@ namespace rescuePars.ECS
 
         private string fragment = "Shader/fragment.fs";
         private string vertex = "Shader/vertex.vs";
+        public RendererExtension extension = null;
 
         public MeshRenderer()
         {
@@ -60,6 +68,7 @@ namespace rescuePars.ECS
             GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 6 * sizeof(float), 0);
             GL.EnableVertexAttribArray(0);
 
+            extension?.init(this);
             return this;
         }
         public void render(Camera camera)
@@ -85,6 +94,7 @@ namespace rescuePars.ECS
             Matrix4 worldModel = model*Matrix4.CreateTranslation(owner.getComponent<Transform>().position);
             shader.setMat4("model", worldModel);
 
+            extension?.onRender();
 
             GL.BindVertexArray(VAO);
             GL.DrawArrays(PrimitiveType.Triangles, 0, owner.getComponent<Mesh>().vertexCount);

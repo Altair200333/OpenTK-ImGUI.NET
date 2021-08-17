@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
+using OpenTK.Graphics.OpenGL4;
 using rescuePars.ECS;
 using rescuePars.Loaders;
 
@@ -37,9 +38,27 @@ namespace rescuePars
             obj.addComponent(new STLMeshLoader().load("cube.stl"));
             obj.addComponent(new Material(new Vector3(0, 0.5f, 0.3f)));
             obj.addComponent(new MeshRenderer());
+            obj.getComponent<MeshRenderer>().extension = new VolumeRenderer();
             obj.getComponent<MeshRenderer>().init("Shader/Projection/fragment.fs", "Shader/Projection/vertex.vs");
             objects.Add(obj);
+        }
+    }
 
+    class VolumeRenderer: RendererExtension
+    {
+        private MeshRenderer renderer;
+        public override void init(MeshRenderer renderer)
+        {
+            this.renderer = renderer;
+            Console.WriteLine("init");
+           
+        }
+
+        public override void onRender()
+        {
+            GL.Enable(EnableCap.Blend);
+            GL.Enable(EnableCap.CullFace);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
         }
     }
 }
