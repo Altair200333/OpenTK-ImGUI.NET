@@ -49,9 +49,28 @@ namespace rescuePars
         private MeshRenderer renderer;
         int texname;
         int id;
-        private float[] buff = new float[]{0.5f, 0.5f, 0.0f, 1.0f};
+        private float[] buff;
+
+        private int w = 10;
+        private int h = 10;
+        private int d = 10;
         public override void init(MeshRenderer renderer)
         {
+            buff = new float[w * h * d * 4];
+            for (int k = 0; k < d; k++)
+            {
+                for (int j = 0; j < h; j++)
+                {
+                    for (int i = 0; i < w; i++)
+                    {
+                        int id = i + j * w + k * w * h;
+                        buff[id * 4 + 0] = (float)i / w;
+                        buff[id * 4 + 1] = (float)j / h;
+                        buff[id * 4 + 2] = (float)k / d;
+                        buff[id * 4 + 3] = 0.9f;
+                    }
+                }
+            }
             this.renderer = renderer;
             Console.WriteLine("init");
 
@@ -78,6 +97,10 @@ namespace rescuePars
             GL.Enable(EnableCap.Texture3DExt);
 
             GL.BindTexture(TextureTarget.Texture3D, texname);
+
+            renderer.shader.setInt("w", w);
+            renderer.shader.setInt("h", h);
+            renderer.shader.setInt("d", d);
             //GL.TexImage3D();
         }
     }

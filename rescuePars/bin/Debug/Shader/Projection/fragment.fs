@@ -10,8 +10,21 @@ uniform vec3 diffuse;
 uniform int val = 1;
 uniform samplerBuffer VertexSampler0;
 
-#define NUM_STEPS 200
+uniform int w;
+uniform int h;
+uniform int d;
 
+#define NUM_STEPS 500
+vec4 getVal(vec3 pos)
+{
+    pos.x = pos.x * (w-1);
+    pos.y = pos.y * (h-1);
+    pos.z = pos.z * (d-1);
+    int i = int(pos.x);
+    int j = int(pos.y);
+    int k = int(pos.z);
+    return texelFetch(VertexSampler0, i + j * w + k * w * h);
+}
 vec4 computeColor()
 {
     vec3 viewDir = localV - camPosObj;
@@ -22,7 +35,7 @@ vec4 computeColor()
     float tol = 0.01f;
 
     vec4 result = vec4(0,0,0,0);
-    return vec4(texelFetch(VertexSampler0, 0).r, 0,0, 1.0f);
+    //return vec4(texelFetch(VertexSampler0, 0));
     for (int iStep = 0; iStep < NUM_STEPS; iStep++)
 	{
         float t = iStep * stepSize;
@@ -31,11 +44,12 @@ vec4 computeColor()
         if (currPos.x < 0.0f - tol || currPos.x >= 1.0f + tol 
 			|| currPos.y < 0.0f - tol || currPos.y > 1.0f + tol
 			|| currPos.z < 0.0f - tol || currPos.z > 1.0f + tol) // TODO: avoid branch?
-			{
-                break;
-            }
-        float density = 0.005f;
-        result += vec4(density,density,density,density);
+		{
+            break;
+        }
+        vec4 val = getVal(currPos);
+        float density = 0.003f;
+        result += val * density;
     }
     return result;
     return vec4(abs(viewDir.x), 0, 0, 0.7f);
