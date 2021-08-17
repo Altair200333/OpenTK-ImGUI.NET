@@ -34,21 +34,12 @@ namespace rescuePars
             obj = new Object();
 
             obj.addComponent(new Transform(new Vector3(0, 0, 3)));
-            obj.addComponent(new STLMeshLoader().load("mod2.stl"));
+            obj.addComponent(new STLMeshLoader().load("cube.stl"));
             obj.addComponent(new Material(new Vector3(0, 0.5f, 0.3f)));
             obj.addComponent(new MeshRenderer());
-            obj.getComponent<MeshRenderer>().init();
+            obj.getComponent<MeshRenderer>().init("Shader/Projection/fragment.fs", "Shader/Projection/vertex.vs");
             objects.Add(obj);
 
-            obj = new Object();
-
-            obj.addComponent(new Transform(new Vector3(-4, 0, -3)));
-            obj.addComponent(new STLMeshLoader().load("mod3.stl"));
-            obj.addComponent(new Material(new Vector3(0, 0.5f, 0.3f)));
-            obj.addComponent(new MeshRenderer());
-            obj.getComponent<MeshRenderer>().init();
-            objects.Add(obj);
-            camera = cam;
         }
     }
 }

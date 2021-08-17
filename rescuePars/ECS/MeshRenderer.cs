@@ -16,12 +16,20 @@ namespace rescuePars.ECS
         Matrix4 model;
         int VBO, VAO;
 
+        private string fragment = "Shader/fragment.fs";
+        private string vertex = "Shader/vertex.vs";
 
         public MeshRenderer()
         {
+
         }
-        public MeshRenderer init()
+        
+     
+        public MeshRenderer init(string fragment = "Shader/fragment.fs", string vertex = "Shader/vertex.vs")
         {
+            this.fragment = fragment;
+            this.vertex = vertex;
+
             Mesh mesh = owner.getComponent<Mesh>();
             if (mesh == null)
             {
@@ -30,7 +38,7 @@ namespace rescuePars.ECS
                 return this;
             }
             model = Matrix4.Identity;
-            shader = new Shader.Shader("Shader/vertex.vs", "Shader/fragment.fs");
+            shader = new Shader.Shader(vertex, fragment);
 
             VAO = GL.GenVertexArray();
             VBO = GL.GenBuffer();
