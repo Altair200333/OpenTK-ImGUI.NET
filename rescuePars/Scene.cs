@@ -47,11 +47,27 @@ namespace rescuePars
     class VolumeRenderer: RendererExtension
     {
         private MeshRenderer renderer;
+        int texname;
+        int id;
+        private float[] buff = new float[]{0.5f, 0.5f, 0.0f, 1.0f};
         public override void init(MeshRenderer renderer)
         {
             this.renderer = renderer;
             Console.WriteLine("init");
-           
+
+            renderer.shader.use();
+            GL.GenBuffers(1, out texname);
+            GL.BindBuffer(BufferTarget.TextureBuffer, texname);
+            GL.BufferData(BufferTarget.TextureBuffer, (IntPtr)(buff.Length * 4), buff, BufferUsageHint.StaticDraw);
+
+            GL.GenTextures(1, out id);
+            GL.BindBuffer(BufferTarget.TextureBuffer, 0);
+            GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1);
+
+            GL.TexBuffer(TextureBufferTarget.TextureBuffer, SizedInternalFormat.Rgba32f, texname);
+
+            GL.BindBuffer(BufferTarget.TextureBuffer, 0);
+            GL.BindTexture(TextureTarget.TextureBuffer, 0);
         }
 
         public override void onRender()
@@ -59,6 +75,10 @@ namespace rescuePars
             GL.Enable(EnableCap.Blend);
             GL.Enable(EnableCap.CullFace);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+            GL.Enable(EnableCap.Texture3DExt);
+
+            GL.BindTexture(TextureTarget.Texture3D, texname);
+            //GL.TexImage3D();
         }
     }
 }

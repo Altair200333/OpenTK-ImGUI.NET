@@ -8,6 +8,38 @@ in vec3 camPosObj;
 
 uniform vec3 diffuse;
 uniform int val = 1;
+uniform samplerBuffer VertexSampler0;
+
+#define NUM_STEPS 200
+
+vec4 computeColor()
+{
+    vec3 viewDir = localV - camPosObj;
+    vec3 rayDir = normalize(viewDir);
+    float stepSize = 1.732f / NUM_STEPS;
+
+    vec3 rayStartPos = localV + vec3(0.5f, 0.5f, 0.5f);
+    float tol = 0.01f;
+
+    vec4 result = vec4(0,0,0,0);
+    return vec4(texelFetch(VertexSampler0, 0).r, 0,0, 1.0f);
+    for (int iStep = 0; iStep < NUM_STEPS; iStep++)
+	{
+        float t = iStep * stepSize;
+        vec3 currPos = rayStartPos + rayDir * t;
+
+        if (currPos.x < 0.0f - tol || currPos.x >= 1.0f + tol 
+			|| currPos.y < 0.0f - tol || currPos.y > 1.0f + tol
+			|| currPos.z < 0.0f - tol || currPos.z > 1.0f + tol) // TODO: avoid branch?
+			{
+                break;
+            }
+        float density = 0.005f;
+        result += vec4(density,density,density,density);
+    }
+    return result;
+    return vec4(abs(viewDir.x), 0, 0, 0.7f);
+}
 
 void main()
 {  	
@@ -16,7 +48,7 @@ void main()
     if(val == 1) 
     {
         vec3 viewDir = localV - camPosObj;
-        res = vec4(abs(viewDir.x), 0, 0, 0.7f);
+        res = computeColor();// vec4(abs(viewDir.x), 0, 0, 0.7f);
     }
     else 
     	res = vec4(diffuse, 1.0);
