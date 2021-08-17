@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using OpenTK;
 using OpenTK.Graphics.OpenGL4;
+using rescuePars.Data;
 using rescuePars.ECS;
 using rescuePars.Loaders;
+using Transform = rescuePars.ECS.Transform;
 
 namespace rescuePars
 {
@@ -56,6 +59,20 @@ namespace rescuePars
         private int d = 10;
         public override void init(MeshRenderer renderer)
         {
+            var gradient = new Gradient();
+            gradient.addStep(0, Colors.Yellow);
+            gradient.addStep(0.25f, Colors.OrangeRed);
+            gradient.addStep(0.33f, Colors.Brown);
+            gradient.addStep(0.5f, Colors.Wheat);
+            gradient.addStep(0.75f, Colors.Black);
+            gradient.addStep(1.0f, Colors.Blue);
+            gradient.init();
+
+            var data = SegyBinReader.read("out_2.bin");
+            w = data.w;
+            h = data.h;
+            d = data.depth;
+
             buff = new float[w * h * d * 4];
             for (int k = 0; k < d; k++)
             {
@@ -64,10 +81,12 @@ namespace rescuePars
                     for (int i = 0; i < w; i++)
                     {
                         int id = i + j * w + k * w * h;
-                        buff[id * 4 + 0] = (float)i / w;
-                        buff[id * 4 + 1] = (float)j / h;
-                        buff[id * 4 + 2] = (float)k / d;
-                        buff[id * 4 + 3] = 0.9f;
+                        var value = data.getNormValue(i, j, k);
+                        var color = gradient.evaluate(value);
+                        buff[id * 4 + 0] = color.R / 255.0f;// (float)i / w;
+                        buff[id * 4 + 1] = color.G / 255.0f;//(float)j / h;
+                        buff[id * 4 + 2] = color.B / 255.0f;//(float)k / d;
+                        buff[id * 4 + 3] = value * 0.03f;//(float)k / d * 0.1f;
                     }
                 }
             }
