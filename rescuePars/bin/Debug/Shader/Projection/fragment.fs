@@ -14,6 +14,10 @@ uniform int w;
 uniform int h;
 uniform int d;
 
+uniform float low;
+uniform float high;
+uniform float density;
+
 #define NUM_STEPS 500
 vec4 getVal(vec3 pos)
 {
@@ -97,8 +101,12 @@ vec4 traverse2(vec3 v3dStart, vec3 v3dEnd)
 	{
         if(!inBounds(curPos))
             break;
-		
-        res = BlendUnder(res, getScaledVal(curPos));
+		vec4 value = getScaledVal(curPos);
+        if(value.w>=low && value.w <= high)
+        {
+            value.w *= density;
+            res = BlendUnder(res, value);
+        }
         if(res.a>1)
             return res;
 		if (tx <= ty && tx <= tz)

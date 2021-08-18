@@ -146,6 +146,7 @@
     <Compile Include="ECS\MeshRenderer.cs" />
     <Compile Include="ECS\Transform.cs" />
     <Compile Include="Engine.cs" />
+    <Compile Include="GUI\IGuiDrawable.cs" />
     <Compile Include="GUI\ImGUINetWrap\GUIShader.cs" />
     <Compile Include="GUI\ImGUINetWrap\ImGuiController.cs" />
     <Compile Include="GUI\ImGUINetWrap\Texture.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Loaders\MeshLoader.cs" />
     <Compile Include="Loaders\STLMeshLoader.cs" />
     <Compile Include="Scene.cs" />
+    <Compile Include="Volume\VolumeRenderer.cs" />
     <Compile Include="Window\Input.cs" />
     <Compile Include="Object.cs" />
     <Compile Include="Program.cs" />

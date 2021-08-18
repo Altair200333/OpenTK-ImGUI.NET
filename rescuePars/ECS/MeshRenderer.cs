@@ -5,18 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
 using OpenTK.Graphics.OpenGL4;
+using rescuePars.GUI;
 
 namespace rescuePars.ECS
 {
-    abstract class RendererExtension
+    abstract class RendererExtension: IGuiDrawable
     {
         public abstract void init(MeshRenderer renderer);
         public abstract void onRender();
 
+        public abstract void drawGui();
     }
 
     /// <summary>Component responsible for drawing mesh component attached to object</summary>
-    class MeshRenderer : Component
+    class MeshRenderer : Component, IGuiDrawable
     {
         public Shader.Shader shader;
 
@@ -100,5 +102,9 @@ namespace rescuePars.ECS
             GL.DrawArrays(PrimitiveType.Triangles, 0, owner.getComponent<Mesh>().vertexCount);
         }
 
+        public void drawGui()
+        {
+            extension?.drawGui();
+        }
     }
 }

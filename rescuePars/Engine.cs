@@ -9,6 +9,7 @@ using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Input;
 using rescuePars.ECS;
+using rescuePars.GUI;
 
 namespace rescuePars
 {
@@ -186,7 +187,7 @@ namespace rescuePars
 
                             Vector3 tmp = obj.getComponent<Transform>().position;
                             System.Numerics.Vector3 v = new System.Numerics.Vector3(tmp.X, tmp.Y, tmp.Z);
-                            ;
+                            
                             ImGui.DragFloat3("Position", ref v, 0.1f);
                             obj.getComponent<Transform>().position = new Vector3(v.X, v.Y, v.Z);
 
@@ -199,9 +200,18 @@ namespace rescuePars
                                 obj.getComponent<Material>().color = new Vector3(v2.X, v2.Y, v2.Z);
                             }
 
+                            foreach (var component in obj.componentManager)
+                            {
+                                if (component is IGuiDrawable drawable)
+                                {
+                                    drawable.drawGui();
+                                }
+                            }
+
                             ImGui.TreePop();
                         }
 
+                       
                         ImGui.PopID();
                     }
 
