@@ -31,8 +31,8 @@ namespace rescuePars.Volume
         {
             var gradient = createGradient();
 
-            //readData(gradient);
-            createData();
+            readData(gradient);
+            //createData();
 
             this.renderer = renderer;
             Console.WriteLine("init");
@@ -59,9 +59,9 @@ namespace rescuePars.Volume
 
         void createData()
         {
-            w = 10;
-            h = 10;
-            d = 10;
+            w = 5;
+            h = 5;
+            d = 5;
             buff = new float[w * h * d * 4];
             for (int k = 0; k < d; k++)
             {
@@ -74,7 +74,7 @@ namespace rescuePars.Volume
                         buff[id * 4 + 0] = 0;//float)i / w;
                         buff[id * 4 + 1] = 0;//(float)j / h;
                         buff[id * 4 + 2] = (float)k / d;
-                        buff[id * 4 + 3] = (float)k / d * 0.2f;
+                        buff[id * 4 + 3] = 1;//(float)k / d;
                     }
                 }
             }
@@ -99,7 +99,7 @@ namespace rescuePars.Volume
                         buff[id * 4 + 0] = color.R / 255.0f; // (float)i / w;
                         buff[id * 4 + 1] = color.G / 255.0f; //(float)j / h;
                         buff[id * 4 + 2] = color.B / 255.0f; //(float)k / d;
-                        buff[id * 4 + 3] = value * 0.03f; //(float)k / d * 0.1f;
+                        buff[id * 4 + 3] = value; //(float)k / d * 0.1f;
                     }
                 }
             }
@@ -138,13 +138,13 @@ namespace rescuePars.Volume
 
         public override void drawGui()
         {
-            float dragSpeed = 0.005f;
+            float dragSpeed = 0.0003f;
             ImGui.PushID(guid.ToString());
             if (ImGui.TreeNode("Volume"))
             {
                 ImGui.DragFloat("low", ref low, dragSpeed, 0, high);
                 ImGui.DragFloat("high", ref high, dragSpeed, low, 1);
-                ImGui.DragFloat("density", ref density, dragSpeed, 0, 1);
+                ImGui.DragFloat("density", ref density, dragSpeed, 0, 30);
 
                 ImGui.TreePop();
             }

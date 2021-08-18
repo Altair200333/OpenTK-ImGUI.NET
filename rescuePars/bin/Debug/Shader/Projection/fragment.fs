@@ -48,7 +48,7 @@ bool inBounds(vec3 v)
 {
     float tol = 0.01f;
     return v.x>=0 - tol && v.x<(w - 1 + tol) &&
-         v.y>=0 - tol && v.y<=(d - 1 + tol ) && v.z>=0 - tol && v.z<=(h - 1 + tol) ;
+         v.y>=0 - tol && v.y<=(d - 1 + tol ) && v.z>=0 - tol && v.z<=(h - 1+ tol) ;
 }
 vec4 BlendUnder(vec4 color, vec4 newColor)
 {
@@ -68,9 +68,9 @@ vec4 traverse2(vec3 v3dStart, vec3 v3dEnd)
 	float x1 = v3dStart.x + 0.5f;
 	float y1 = v3dStart.y + 0.5f;
 	float z1 = v3dStart.z + 0.5f;
-	float x2 = v3dEnd.x + 0.5f;
-	float y2 = v3dEnd.y + 0.5f;
-	float z2 = v3dEnd.z + 0.5f;
+	float x2 = v3dEnd.x +   0.5f;
+	float y2 = v3dEnd.y +   0.5f;
+	float z2 = v3dEnd.z +   0.5f;
 
 	int i = int(floor(x1));
 	int j = int(floor(y1));
